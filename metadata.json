@@ -1,0 +1,6 @@
+{
+  "name": "Optoelectronic Fuel Moisture Lab",
+  "description": "Interactive scientific simulation laboratory for dual-wavelength optoelectronic fuel moisture measurement, analog amplification, and digital signal processing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

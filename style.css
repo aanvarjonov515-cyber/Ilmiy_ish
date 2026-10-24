@@ -1,0 +1,46 @@
+/*
+ * OPTOELECTRONIC FUEL MOISTURE ANALYSIS LAB
+ * Shared Stylesheet for Laboratory Simulation
+ */
+
+:root {
+  --color-canvas-bg: #030712;
+  --color-panel-bg: #0f172a;
+  --color-border: #1e293b;
+  --color-cyan: #06b6d4;
+  --color-orange: #ea580c;
+  --color-green: #16a34a;
+  --color-rose: #f43f5e;
+  --color-amber: #f59e0b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-canvas-bg);
+  color: #f8fafc;
+}
+
+.mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}

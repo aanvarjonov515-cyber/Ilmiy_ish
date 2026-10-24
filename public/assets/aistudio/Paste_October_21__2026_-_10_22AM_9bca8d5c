@@ -1,0 +1,604 @@
+GOOGLE AI STUDIO — MASTER PROMPT: REPAIR AND INTEGRATE THE SCHEMATIC ONLY
+Project: Optoelectronic measurement circuit + digital synchronizer + dual infrared emitter driver
+Application language: Uzbek
+Scope of this task: THE ELECTRONIC SCHEMATIC AND ITS ELECTRICAL MODEL ONLY.
+
+Do not redesign the website, do not work on the spectrum charts, and do not spend time on graph animation in this task. Focus all effort on the circuit diagram, all components, all wires/nodes, source controls, estimated electrical values, and the teacher's potentiometer-to-LED demonstration.
+
+=============================================================
+0. IMPORTANT: WHICH REFERENCE IMAGES TO USE
+=============================================================
+
+Use all relevant circuit images that are actually attached to this Google AI Studio project.
+
+REFERENCE A — Existing dark-background schematic in the website:
+This is the existing drawing that must be preserved. It contains the IR source/FD detector, analog amplifier stages A1/A2, A3.1/A3.2 blocks, resistors/capacitors, supply rails, ground symbols, test points TP1–TP6, and signal/output branches.
+
+REFERENCE B — White-background ANALOG measurement schematic:
+The image shows, from left to right:
+- Photodetector symbol labeled “ФД” / FD with incoming light arrow.
+- C2 on the upper input line.
+- C3 from the upper signal node to ground.
+- R2 to +12 V.
+- R1 from the lower detector node to ground.
+- C1 coupled toward the A1 input.
+- A1 amplifier, a -12 V rail marker, and ground/power pins shown around the amplifier.
+- A1 output through C4 and R3 to A2 input.
+- R4 feedback path around the A2 stage.
+- R5 connected to +12 V and the A2-side node.
+- C5 on the upper output path.
+- R6 toward -12 V and C6 connected on the lower branch.
+- A2 output leading to the A3.1/A3.2 module.
+- A3.1/A3.2 block with pins/labels shown in the image.
+- External labels visible at the right, including “сиг”, “опор”, “измер”, “обм”, “A” and “B” sine/signal labels (some text is blurry; preserve labels as seen and mark uncertain meanings instead of guessing).
+- All visible connection points, ground symbols, supply symbols, component designators, and wires.
+
+The same white-background analog schematic may have been uploaded twice. Treat duplicate copies as the SAME reference, not as two distinct circuits.
+
+REFERENCE C — White-background DIGITAL synchronization + LED driver schematic from the earlier reference:
+This is a different circuit. If it is not visible/attached in this Google AI Studio session, DO NOT invent its exact pin-by-pin topology. Ask for that reference image or create a clearly labeled provisional section with all unknown connections marked “Unresolved / Taxminiy ulanish”. The intended visible parts include:
+- DA1.1, DA1.2, DA1.3 logic gates.
+- DA2 trigger/flip-flop-like block, with S, T, C, R style pin labels shown in the image.
+- DA3.1, DA3.2, DA3.3, DA3.4 logic gates.
+- Capacitors C1–C8.
+- Resistors R1–R17, including variable-resistor symbols R9 and R17 where shown.
+- Transistors T1, T2, T3, T4.
+- Diodes VD1 and VD2.
+- Two output optical indicator/emitter symbols labeled “ИД1” and “ИД2”.
+- +5 V and +12 V rails and visible grounds.
+- All visible signal lines, junctions, pins and output labels.
+The reference may use repeated R/C/DA labels that also occur in the analog circuit. These labels must remain readable in their own circuit zones, but internal IDs must be unique.
+
+VERY IMPORTANT: The user wants these sections integrated into one understandable schematic. Do not show the white analog schematic as one disconnected page and the digital/LED circuit as an unrelated page. Preserve the existing project layout and create one main, large integrated circuit workspace with functional zones connected by explicitly named interface nodes.
+
+If the exact source image for a pin connection is too blurry to inspect, record that connection as “Assumed” or “Unresolved”. Never silently fabricate a connection and claim it came from the reference.
+
+=============================================================
+1. GOAL IN SIMPLE WORDS
+=============================================================
+
+Imagine wires are roads and components are places along those roads. A wire that looks like it nearly touches a component is not good enough: its endpoint must really meet the correct component terminal in both the drawing and the data model.
+
+The finished application must:
+1. Preserve the original first analog circuit and its existing components.
+2. Add all identifiable components in the second digital/driver circuit.
+3. Join the analog and digital/driver sections into ONE coherent conceptual system.
+4. Display every component, label, pin/terminal, supply, ground, wire, and junction clearly.
+5. Repair missing/invisible/broken wire segments so the signal paths are continuous and traceable.
+6. Show approximate calculated voltage, current, voltage drop, charge, power, and state where the model supports those quantities.
+7. Add a three-terminal potentiometer and adjustable power source/current limit.
+8. Model two infrared emitters (ИД1 and ИД2) with optical beams directed toward the existing FD detector.
+9. Ensure that increasing the specified effective potentiometer resistance reduces the simulated LED brightness, and decreasing it increases brightness.
+10. Label all results as simulated estimates, not experimentally measured results.
+
+All values can be approximate for this educational project. “Approximate” does NOT mean random. Calculations must follow documented rules consistently. Do not invent actual hardware measurements, exact chip models, exact component values, or verified fuel moisture percentages.
+
+=============================================================
+2. INSPECT THE EXISTING PROJECT BEFORE EDITING
+=============================================================
+
+Read the existing project source before changing anything:
+- index.html
+- about.html
+- style.css
+- script.js
+- any additional source/module files already used by the project.
+
+Then:
+1. Locate the existing circuit drawing and identify how components and wires are currently rendered.
+2. Identify the source of missing wires, short wire ends, terminals that do not touch, hidden wires, wrong z-order, disconnected branches, or absent junction dots.
+3. Identify which components from the provided schematic were omitted.
+4. Identify which measurements are currently hard-coded, missing, or inconsistent.
+5. Keep the current design and code structure where practical.
+6. Modify the actual files. Do not return only a plan, mockup, SVG screenshot, or pseudocode.
+7. If the current project cannot be edited directly, provide complete code for the affected files and say exactly where each file belongs.
+
+No graph redesign is part of this request. Do not remove existing graphs from the project, but do not spend this task on them. The priority is the complete, correct-looking and internally consistent circuit schematic.
+
+=============================================================
+3. ONE MAIN CIRCUIT WORKSPACE AND FUNCTIONAL ZONES
+=============================================================
+
+Use one large, pannable and zoomable SVG workspace. Maintain all existing circuit components and add the missing elements. Arrange the circuit in functional zones, but connect the zones using named nodes so a user can trace the full process.
+
+Suggested visual arrangement:
+ZONE 1 — Power supply and controls:
+- Adjustable DC power source/generator panel.
+- Voltage setting.
+- Current-limit setting.
+- Master three-terminal potentiometer.
+- Clear separate rails for analog, digital, and LED-driver sections if the references show separate rails.
+
+ZONE 2 — Digital synchronization/logic section:
+- DA1.1, DA1.2, DA1.3, DA2, DA3.1, DA3.2, DA3.3, DA3.4.
+- C1–C8 and R1–R17, plus VD1/VD2, T1–T4.
+- Preserve connections/pin numbers visible in the digital reference.
+
+ZONE 3 — LED driver and emitters:
+- Driver paths and their current-limiting parts.
+- Emitter ID1 and emitter ID2 with visibly identifiable anode/cathode terminals.
+- A separate animated optical beam from each emitter aimed at the FD detector.
+
+ZONE 4 — Analog optical input and amplifier:
+- FD photodetector and its input circuit.
+- C1–C6, R1–R6 of the analog reference.
+- A1, A2, A3.1 and A3.2.
+- Test points and output labels.
+
+ZONE 5 — Signal outputs and test points:
+- TP1–TP6 where present.
+- A and B signal paths/outputs.
+- Signal/reference/measurement labels visible in the analog reference.
+- Digital synchronization output and driver status nodes where visible in the second reference.
+
+These zones are a layout proposal, not permission to invent circuit connections. Use the original screenshots to decide the actual geometry and topology. Where integration needs an inferred connection between the two source circuits, use clearly named interface nodes and mark the link “Taxminiy ulanish”.
+
+Suggested interface node names:
+- POT_WIPER / CONTROL_IN
+- DIGITAL_SYNC_OUT
+- LED1_DRIVER_OUT
+- LED2_DRIVER_OUT
+- IR_BEAM_1 (optical path, not electrical)
+- IR_BEAM_2 (optical path, not electrical)
+- FD_SIGNAL_OUT
+- A1_OUT
+- A2_OUT
+- ANALOG_A_OUT
+- ANALOG_B_OUT
+
+Use the names only where they make sense in the actual project; document all assumed links. An optical beam must never be drawn as an electrical wire.
+
+=============================================================
+4. COMPLETE COMPONENT INVENTORY — DO NOT OMIT PARTS
+=============================================================
+
+A. FIRST / ANALOG SCHEMATIC:
+Keep every original visible component from the dark circuit and every identifiable item in the white analog reference:
+- FD / “ФД” photodetector.
+- A1 and A2 amplifier blocks.
+- A3.1 and A3.2 module/blocks as actually drawn.
+- Analog resistors R1–R6.
+- Analog capacitors C1–C6 where shown.
+- TP1, TP2, TP3, TP4, TP5, TP6 where present in the existing dark circuit.
+- +12 V, -12 V, and other supply connections actually shown.
+- All ground symbols.
+- All visible external output/port labels: preserve “сиг”, “опор”, “измер”, “обм”, “A”, “B” and related text as legible, marking uncertain meanings rather than inventing definitions.
+- All wires, junctions, pins and terminal circles.
+
+B. SECOND / DIGITAL AND LED DRIVER SCHEMATIC:
+Include all identifiable components from the second white schematic:
+- 8 labeled logic/trigger blocks: DA1.1, DA1.2, DA1.3, DA2, DA3.1, DA3.2, DA3.3, DA3.4.
+- 8 capacitors: C1–C8, as they appear in the digital reference.
+- 17 resistors: R1–R17, as they appear in the digital reference.
+- 4 transistors: T1–T4.
+- 2 diodes: VD1 and VD2.
+- 2 output emitters/LEDs: ИД1 and ИД2.
+- Visible +5 V and +12 V rails, grounds, connectors, pins, signal lines, and junctions.
+- Adjustable resistor symbols R9 and R17 if they are part of the source diagram. Keep them; do not silently replace them with fixed resistors.
+This gives 41 specifically identified items in the second circuit inventory (8 logic/trigger blocks + 8 capacitors + 17 resistors + 4 transistors + 2 diodes + 2 emitters). Supply symbols, grounds, wires, and junctions are additional, not part of this count.
+
+Avoid duplicate-ID bugs because both source schematics reuse labels such as R1 or C1. Use unique internal IDs such as:
+- ANALOG_R1, ANALOG_C1, ANALOG_A1
+- DIGITAL_R1, DIGITAL_C1, DIGITAL_DA1_1
+The UI may display “R1” within the correct zone but the code must use stable unique IDs.
+
+Do not count the two duplicate uploaded copies of the analog schematic as additional hardware. They represent the same source drawing.
+
+=============================================================
+5. REPAIR EVERY WIRE AND NODE
+=============================================================
+
+This is a highest-priority requirement. A circuit is not repaired just because its components are visible.
+
+Represent every wire and junction explicitly in the circuit data model. For example:
+
+{
+  id: "ANALOG_WIRE_FD_TO_A1",
+  fromNode: "ANALOG_FD_OUT",
+  toNode: "ANALOG_A1_INPUT",
+  path: [{x: 100, y: 180}, {x: 150, y: 180}],
+  status: "verified_or_assumed",
+  electrical: true
+}
+
+This is only an example schema. Do not copy these coordinates or assume this particular connection unless the reference/source code confirms it.
+
+Required checks:
+- Every wire endpoint physically touches the relevant terminal/node.
+- Every component terminal connects to the correct wire or is explicitly shown as intentionally open.
+- Every three-way/four-way junction has a visible junction dot if electrically connected.
+- Crossing wires are NOT automatically connected unless the reference shows a junction.
+- A wire must not disappear under an opaque component and reappear with a misleading gap.
+- Use consistent SVG coordinates and snapping.
+- Ensure draw-order does not hide wires/junctions behind component bodies. A typical order is grid, wires, active-signal overlay, junctions, symbols, terminals, labels, selection/hover overlays.
+- Keep the original relative arrangement where possible, but move components slightly if necessary to show complete wires and labels.
+- Do not draw an electrical line through the interior of a symbol unless that is the actual schematic convention.
+- Ensure positive/negative supply pins and ground returns are visible when supported by the reference.
+- Ensure the LED branch includes its actual modeled driver/current-limiting path, rather than a direct ideal LED across a supply.
+- Every shown connection must exist in the data model, and each modeled wire should be visible unless explicitly documented.
+- When a connection cannot be verified from the screenshot, style it differently (e.g. dashed amber) and label it “Taxminiy”.
+- A disconnected terminal must be visually obvious, not silently colored as an active path.
+
+Create a “Ulanishlarni tekshirish” diagnostic mode:
+- Highlight all wires attached to a clicked node.
+- Display node ID and its connected component terminals.
+- Show totals for verified, assumed, unresolved, and open connections.
+- Mark free terminals and invalid node IDs.
+- Check for zero-length wires and wire endpoints that do not match node positions.
+- Do not report “all connected” unless the code validation actually establishes this.
+
+=============================================================
+6. SPECIFIC ANALOG SECTION DETAILS
+=============================================================
+
+Use the white analog schematic to preserve these visible relationships as accurately as the image permits:
+
+LEFT SENSOR INPUT:
+- FD photodetector has an incoming-light symbol/arrow.
+- The upper detector node is associated with C2, C3 and R2 as shown.
+- C2 lies in the upper input line.
+- C3 branches from the upper node to ground.
+- R2 runs from the upper node to the +12 V terminal.
+- The detector's lower node connects toward C1 and R1 as shown.
+- R1 returns to ground.
+- C1 couples the detector-side signal toward A1.
+- Preserve the input node junctions shown at the vertical detector branch.
+
+FIRST AMPLIFIER A1:
+- Draw the amplifier symbol and all visible supply/input/output pins.
+- Preserve the -12 V supply mark and ground/power connections shown.
+- Connect the output through C4 and R3 toward the second amplifier stage as drawn.
+- Keep the component labels C4 and R3 visible and separate.
+
+SECOND AMPLIFIER A2:
+- Keep A2, R3, R4, R5, R6, C5 and C6 as visible.
+- Preserve the R4 feedback path drawn around the A2 area as accurately as the raster image permits.
+- Preserve R5's connection to the +12 V rail and its node as drawn.
+- Preserve C5 along the upper output/coupling path as shown.
+- Preserve R6 toward the -12 V branch and C6 on the lower branch.
+- Connect A2 output toward the A3.1/A3.2 block according to the screenshot.
+- If a precise pin/function is uncertain, keep the wire geometry from the source image but flag the unknown electrical role. Do not invent a datasheet or amplifier model.
+
+A3.1 / A3.2 BLOCK:
+- Reproduce the rectangular block/module with the visible pin numbers and labels; do not replace it with two triangular op-amps unless the existing project or clearer reference establishes that symbol.
+- Keep the readable external labels “сиг”, “опор”, “измер”, “обм”, “A синх”, “B синх” (or preserve exact legible spelling from the image).
+- Some labels/pin meanings are unclear. Display the original text and mark the description “ma’nosi rasmda aniq emas” instead of fabricating a definition.
+- Show every visible output terminal and wire path.
+
+Do not confuse the analog A3.1/A3.2 module with the digital DA3.1/DA3.2 logic gates. They are different components in different source schematics and must have different internal IDs.
+
+=============================================================
+7. SPECIFIC DIGITAL / DRIVER SECTION DETAILS
+=============================================================
+
+Reconstruct the digital schematic from its own reference, not from guessed topology.
+
+- Keep the DA1.1, DA1.2, DA1.3 logic blocks in their source order and preserve the visibly numbered pins and wire loops.
+- Keep DA2 with its shown S/T/C/R-style pin labels and connections.
+- Keep DA3.1, DA3.2, DA3.3 and DA3.4 in the shown order.
+- Include the visible capacitors C1–C8 in the positions/branches indicated by the source.
+- Include all resistors R1–R17; preserve their positions, junctions, and role in the source drawing.
+- Keep R9 and R17's variable-resistor symbols and wiper arrows where visible.
+- Include VD1 and VD2 and preserve their orientation as shown.
+- Include transistor drivers T1/T2 and T3/T4 in their respective LED output branches.
+- Preserve the top +12 V rail for the first emitter branch and the +12 V rail for the second branch if shown separately. Do not accidentally short together unrelated nodes.
+- Preserve +5 V logic supply markers and all shown ground symbols.
+- Include the ID1 and ID2 light-emitting devices at the right side, with their series resistors/variable resistors and transistor stages as actually drawn.
+- Reproduce visible connection lines and junctions around transistor base, collector, and emitter terminals.
+- Where transistor type/polarity is unclear, preserve the symbol appearance from the reference, mark the type “taxminiy”, and avoid claiming a precise transistor part.
+- Where the logic gate has “&” and an output bubble, preserve the drawn gate form; do not claim a specific commercial IC.
+- If a complete logic timing model is beyond the project scope, use a clearly labeled conceptual logic model while preserving all visible blocks and wires.
+- Do not remove any component to make the drawing simpler.
+
+If the original digital schematic is not available in this AI Studio conversation, do not guess the exact wire topology. Ask the user to attach it or draw that section as provisional with all uncertain links clearly marked.
+
+=============================================================
+8. ADD THE MASTER THREE-TERMINAL POTENTIOMETER
+=============================================================
+
+The teacher requires an adjustable resistance input with THREE physical terminals. Do not draw it as an ordinary two-terminal resistor.
+
+Add a recognizable potentiometer symbol and label its terminals:
+- A — first fixed end.
+- W — movable wiper.
+- B — second fixed end.
+
+Add a slider/knob and numeric display, for example “R_AW = 20 kΩ (Taxminiy)”. Use a sensible adjustable range such as 1 kΩ to 100 kΩ only as an explicitly assumed default, unless a real value is available. Validate the input and do not accept NaN, Infinity, negative resistance, or values outside the defined range.
+
+Suggested conceptual connection for the requested monotonic demonstration:
+- Terminal A: stable control reference, e.g. +5 V control rail.
+- Terminal B: GND/reference.
+- Terminal W: driver/control input.
+- Define the displayed adjustable resistance as R_AW, the resistance between A and wiper W. As R_AW increases toward its maximum, the wiper moves toward B/GND, reducing its control voltage; as R_AW decreases, the wiper moves toward A/+5 V, increasing control voltage.
+- Map this control input to the driver so greater R_AW means lower permitted LED drive and dimmer simulated emission; lower R_AW means higher drive and brighter emission.
+- This is a proposed model wiring for the demonstration. If the actual source diagram suggests a different arrangement, preserve the source where known and mark the integration connection as assumed.
+
+A three-terminal potentiometer can be used as a voltage divider or as a two-terminal rheostat, depending on the wiring. Do not pretend it is both at the same time. Display the actual selected mode in the inspector. The user specifically asks for a three-terminal control, so all three terminals must be visible, labeled, and connected appropriately in the rendered diagram.
+
+Do not simply change a “brightness” label. The potentiometer must alter the calculated control voltage, driver command/current, relative optical output, light-beam brightness, FD response, and related measurement value in the shared model.
+
+If R9 and R17 already exist as variable resistors in the second reference, keep them as separate original circuit components. The new master potentiometer is not permission to delete or rename R9/R17. If you use one of R9/R17 as the teacher's master control instead of adding another potentiometer, explicitly explain the decision and show all three terminals; otherwise add a separate clearly labeled POT_MASTER control while preserving the two reference components.
+
+=============================================================
+9. ADD AN ADJUSTABLE POWER SOURCE / GENERATOR
+=============================================================
+
+Add a control panel and source symbol in the schematic:
+- Source enable/disable.
+- Adjustable output voltage.
+- Adjustable current limit.
+- Display of the configured source voltage.
+- Display of simulated load current (not the current-limit setting).
+- Display of source output power if the model calculates it.
+- Display of “Current limit active” when the estimated model reaches its limit.
+
+Use editable values with documented bounds and units. Initial values are ASSUMPTIONS, not known hardware ratings. A reasonable illustrative starting state may use:
+- Logic rail: +5 V.
+- LED driver rail: +12 V.
+- Analog amplifier rails: +12 V and -12 V only where shown by the analog reference.
+Keep the rails distinct and only connect them together if the topology/reference indicates a shared ground/reference.
+
+Important:
+- A voltage-source setting is not the same as current draw.
+- The current limit constrains the allowed supply/driver current; it does not force that same current through every branch.
+- Do not directly place an ideal LED across a supply. Include the source circuit's series resistance and/or modeled transistor current-control path.
+- If the model is block-level instead of a full nodal solver, label its current-limit enforcement as an approximate driver model.
+- If the source is disabled, dependent output/driver states must reflect that state and active-current animations should stop.
+
+=============================================================
+10. MODEL THE TWO INFRARED EMITTERS AND THEIR OPTICAL PATHS
+=============================================================
+
+Keep two distinct output components corresponding to ИД1 and ИД2 from the digital reference. Refer to them as “IR LED 1 / ИД1” and “IR LED 2 / ИД2” if their infrared type is confirmed by the teacher; otherwise label wavelength as assumed.
+
+Each emitter must have:
+- Its own unique component ID.
+- Visible anode and cathode terminals.
+- A modeled driver connection.
+- An estimated current.
+- A relative brightness/intensity indicator.
+- A documented assumed wavelength if no part number is given.
+- On/off status.
+- A reason for being on or off based on driver/supply/control state.
+
+Make the two emitter symbols face the FD detector in the integrated workspace. Draw TWO OPTICAL PATHS from emitters to the photodetector:
+- Use dashed/glowing paths and optionally animated light pulses.
+- Optical paths must visibly terminate at the detector’s optical input.
+- The light-beam intensity must follow the emitter's simulated optical output.
+- The two beams should remain separately identifiable. If the detector model sums them, state the assumption and show each channel contribution.
+- If one emitter is off, its optical beam should dim or stop; do not leave a full-brightness beam unrelated to state.
+- Do not draw the optical path as an ordinary electrical wire.
+- Ensure the detector receives an input signal related to received optical power/alignment/attenuation under the implemented model.
+
+If the teacher expects one visible LED whose brightness is easy to see, optionally draw a separate visible demonstration indicator only if it does not replace either original IR emitter. Label it “Visual brightness indicator”; make it mirror the modeled brightness level, and make clear that real IR light is usually invisible to human eyes. Do not silently change the two specified IR output components.
+
+=============================================================
+11. SHARE ONE SIMULATION STATE ACROSS THE WHOLE SCHEMATIC
+=============================================================
+
+Implement one coherent state model for:
+- Source enabled status, voltage and current limit.
+- Potentiometer position and effective resistance.
+- Driver enable and estimated branch current.
+- LED 1 / LED 2 state and relative optical output.
+- Optical attenuation/alignment if modeled.
+- FD received optical input and estimated detector response.
+- A1/A2 amplifier output estimates.
+- A/B output states where the available model supports them.
+- Per-component and per-branch values.
+- Digital block states if a conceptual logic model is implemented.
+
+The circuit drawing, tooltips, component inspector, status badges and measurements must read from this same state. Do not maintain separate contradictory hard-coded values for the picture and the measurement panel.
+
+Use physically appropriate simplified formulas where applicable:
+- Resistor: V = I × R.
+- Resistor power: P = V × I or I²R.
+- Capacitor charge: Q = C × V.
+- Capacitor stored energy: E = 0.5 × C × V².
+- Capacitor current: I = C × dV/dt only if voltage changes with time in the model.
+- Simplified amplifier: Vout = gain × Vin, clipped/limited by documented output rails.
+- Illustrative photodetector current: I_photo = responsivity × received optical power, with units and assumed responsivity documented.
+- LED relative optical output may be modeled as proportional to current over a defined illustrative range.
+- Include current limiting in the driver model.
+- If using a conceptual block-level simulation rather than solving every node with Kirchhoff's laws, label it “Blok darajasidagi taxminiy simulyatsiya”. Do not claim that every displayed branch current is a fully solved circuit result.
+
+Use consistent signs and units. Do not show arbitrary positive currents on every wire. In inactive branches, show zero/near-zero modeled current and no active-current animation. If a quantity is not supported by the simplified model, display “Hisoblanmaydi — joriy modelda mavjud emas” instead of fabricating it.
+
+=============================================================
+12. SHOW CURRENT, VOLTAGE, CHARGE AND WIRE STATUS
+=============================================================
+
+Repair the missing measurements near wires/components. Measurements are useful only if they are tied to a supported calculation.
+
+On hover/click for a wire, terminal or test point, show when supported:
+- Wire ID.
+- Start node and end node.
+- Connected components.
+- Start/end node voltage.
+- Voltage drop ΔV.
+- Branch current and direction.
+- Power where meaningful.
+- Connection status: verified, assumed, open, or unresolved.
+- “Simulated / Taxminiy” provenance label.
+
+For components:
+RESISTOR:
+- Resistance, voltage, current, power, connected nodes.
+- Editable resistance within valid bounds.
+
+CAPACITOR:
+- Capacitance, voltage, charge Q and stored energy E.
+- Capacitor current only if dV/dt is actually modeled.
+- Time constant only when the relevant resistance and topology are available.
+
+TRANSISTOR:
+- Driver on/off state.
+- Estimated branch current when supported.
+- Base/control state where the simplified model defines it.
+- State whether it is used as an approximate switch/driver.
+
+LOGIC GATE / TRIGGER:
+- Input state(s), output state, model mode, and timing state if implemented.
+- Do not show a fixed output unrelated to its input.
+
+POTENTIOMETER:
+- Terminal A/W/B and connections.
+- Total resistance and effective resistance being used.
+- Wiper/control voltage.
+- Mapping from resistance to the LED driver command.
+
+IR LED:
+- Anode/cathode connections.
+- Estimated current.
+- Driver state.
+- Relative optical output.
+- Optical path status.
+
+FD:
+- Received optical intensity/power (assumed or modeled).
+- Assumed detector responsivity/sensitivity.
+- Estimated photo current.
+- Detector output voltage only if the analog input model supports it.
+- Wavelength/channel information when defined.
+
+For an ideal wire in the simplified model, voltage drop should be zero or close to zero. Do not invent nonzero drops unless wire resistance is explicitly modeled.
+
+=============================================================
+13. VISUAL DESIGN OF THE CIRCUIT
+=============================================================
+
+Preserve the existing polished dark-background technical look. Use:
+- Dark navy/graphite circuit canvas.
+- Subtle grid.
+- Bright cyan/blue terminals and junctions.
+- Muted gray for inactive wires.
+- Green/cyan for active modeled electrical paths.
+- Orange/amber dashed for assumed/unresolved connections.
+- Distinct optical beam styling for the IR paths so they cannot be confused with wires.
+- Readable component values and labels.
+- Adequate space around components and wire corners.
+- Visible terminal points on both ends of each component.
+- Clear positive/negative supply and ground symbols.
+
+Do not let labels overlap component symbols or cover wire junctions. Do not let the circuit shrink into a tiny diagram. Support SVG pan, zoom, fit-to-screen and responsive resizing.
+
+Every visible component should be independently selectable and have a stable internal ID. Hover should highlight the component and its connected nodes/wires. Clicking opens an inspector panel with component-specific information. Do not replace the existing schematic with a flattened screenshot. Draw all components and wires with editable SVG objects.
+
+=============================================================
+14. ELECTRICAL FLOW AND ANIMATION — SCHEMATIC ONLY
+=============================================================
+
+If the application already animates currents, repair the animation so it follows modeled, connected electrical paths:
+- Markers follow actual SVG wire paths, not arbitrary screen directions.
+- Do not animate a disconnected branch as conducting.
+- Current direction and active state should come from the simulated branch current.
+- The LED optical beams are separate from electrical wire animations.
+- Source disabled → driver outputs inactive, and related paths become inactive.
+- Potentiometer changes → control voltage changes → driver/current/LED brightness changes → optical input to FD changes → detector/analog output updates.
+- Keep animation restrained and coherent with the state.
+This is schematic behavior only. Do not change or rebuild either chart as part of this task.
+
+=============================================================
+15. VALIDATION AND ERROR HANDLING
+=============================================================
+
+Add validation for all editable values:
+- Reject empty, non-numeric, NaN, infinite, and out-of-range inputs.
+- Keep the last valid value if input is invalid and show a useful Uzbek error message.
+- Avoid negative resistance/capacitance unless a component/model explicitly supports it.
+- Prevent invalid supply rails or impossible driver states from generating fake current.
+- Prevent division by zero in the detector or voltage-divider calculations.
+- Never let multiple connections write contradictory values into the same node.
+- Avoid duplicate animation loops and duplicate event listeners.
+
+Add an in-app status summary:
+- “Ulanish tekshirilgan”
+- “Taxminiy ulanish”
+- “Ulanish noma’lum”
+- “Manba yoqilgan/o‘chirilgan”
+- “Drayver faol/no faol”
+- “LED 1 / LED 2 faol/no faol”
+- “FD qabul qilayotgan optik signal”
+- “Natijalar: taxminiy simulyatsiya”
+
+Do not claim a connection is verified merely because it has been drawn. Verification must come from the reference/source data and the actual topology model.
+
+=============================================================
+16. REQUIRED TEACHER DEMONSTRATION
+=============================================================
+
+This exact behavior must work in the app:
+
+TEST 1 — Potentiometer low resistance:
+- Choose a low effective R_AW value.
+- The modeled wiper/control voltage is relatively higher under the specified wiring.
+- The driver permits more current within the source/current-limit constraints.
+- IR emitter brightness and optical beam intensity increase.
+- FD's estimated received optical input and output respond accordingly.
+
+TEST 2 — Potentiometer high resistance:
+- Increase R_AW.
+- The modeled control voltage decreases under the defined inverse control mapping.
+- Driver current/command decreases.
+- IR emitter brightness and beam become dimmer.
+- FD estimated response changes consistently.
+- The status/inspector values must update, not merely the label.
+
+TEST 3 — Decrease resistance again:
+- Brightness must increase again predictably.
+- Results should be monotonic over the defined range, except where a documented current limit/saturation clamps the output.
+
+TEST 4 — Supply:
+- Enable/disable the source and verify affected branches follow the state.
+- Change supply voltage and observe a consistent estimated response.
+- Change the current limit; verify current is constrained only when the modeled load asks for more.
+- Show current-limit setting and actual simulated current as separate fields.
+
+TEST 5 — Both emitters:
+- Enable LED 1 and confirm its own beam and detector contribution respond.
+- Enable LED 2 and confirm its own beam and detector contribution respond.
+- Switch either off and verify the corresponding beam/branch becomes inactive.
+- Do not connect the optical beam as an electrical conductor.
+
+TEST 6 — Wire and value integrity:
+- Click representative wires from detector to A1, A1 through C4/R3 to A2, A2 to A3.1/A3.2, digital logic to the output drivers, and both LED branches.
+- Confirm wire/node labels and current/voltage readings are internally consistent where calculated.
+- Confirm every visibly connected node is the same node in the model.
+- Confirm open/unresolved connections are identified.
+- Confirm no original circuit component has been deleted.
+
+Run these tests if the environment allows execution. If you cannot launch the app or inspect its runtime, state that verification is outstanding. Do not claim tests passed without performing them.
+
+=============================================================
+17. FINAL DELIVERY
+=============================================================
+
+Make real changes in the project files.
+
+At the end, provide in Uzbek:
+1. A simple explanation of the schematic changes.
+2. The exact modified files.
+3. The final component inventory and any component that could not be identified.
+4. Which connections are based directly on the image and which remain assumed/unresolved.
+5. The approximate equations/model used for the potentiometer, driver, LEDs and FD detector.
+6. How to run the project.
+7. The tests actually performed and their results.
+8. Any remaining information needed from the teacher.
+
+FINAL ACCEPTANCE CHECKLIST:
+- Original first/dark schematic is preserved.
+- White analog schematic content is represented and its wires are continuous.
+- All identifiable digital schematic components are included.
+- Duplicate labels from different circuit zones do not collide internally.
+- The main circuit is one integrated workspace, not two unrelated diagrams.
+- Three-terminal potentiometer is visible, all terminals are labeled, and its adjustment works.
+- Increasing R_AW dims the modeled LED output; decreasing R_AW brightens it.
+- Two IR emitters remain present and their optical beams reach the FD detector.
+- Adjustable source voltage/current limit affects the model consistently.
+- Wires are actually connected in the model, not only visually.
+- Supported current, voltage, charge, power and state values update from one shared model.
+- Assumptions and unknown connections are explicitly labeled.
+- No fake experimental measurements or unsupported accuracy claims.
+- This task modifies the SCHEMATIC only; graph redesign is out of scope.
+
+Do not stop at describing what you would do. Inspect, modify, and test the actual existing project wherever possible.

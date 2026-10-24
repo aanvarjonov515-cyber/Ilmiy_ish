@@ -1,0 +1,316 @@
+GOOGLE AI STUDIO — COMPLETE INTEGRATED OPTOELECTRONIC CIRCUIT PROMPT
+Project: Dual-wavelength optical measurement + analog amplification + digital synchronization + dual IR LED output
+Language of the application: Uzbek
+Goal: Modify the existing project, preserve the existing circuit and its good visual design, and integrate both supplied circuit references into ONE understandable, interactive, estimated simulation.
+
+READ THIS FIRST:
+I have supplied two circuit reference images in this project/conversation:
+1. The earlier dark-background circuit: optical source/FD photodetector, analog amplification and filtering stages A1/A2, branches A3.1/A3.2, resistors R1–R6, capacitors C1–C6 where present, test points TP1–TP6, power rails, grounds, and outputs A/B.
+2. The newly supplied white-background schematic: digital logic and synchronization stages DA.1.1, DA.1.2, DA.1.3, DA.2, DA.3.1, DA.3.2, DA.3.3, DA.3.4; capacitors C1–C8 as visibly labeled; resistors R1–R17 as visibly labeled; diodes VD1 and VD2; transistors T1–T4; +5 V and +12 V supply points; ground symbols; and two LED/optical output branches labeled ИД1 and ИД2, including adjustable resistors R9 and R17 in the shown branches. Some labels and exact pin connections may be hard to read from the raster image, so verify visually and preserve uncertainty where needed.
+
+The teacher has clarified the intended demonstration:
+- Combine the two circuit stages into one connected system; do not leave them as unrelated pages or unrelated diagrams.
+- The first analog optical measurement circuit must still provide a meaningful measurement result.
+- The second digital/driver circuit is the synchronization and LED output/control stage.
+- Add an adjustable potentiometer (three terminals) as an input control.
+- Add two infrared LED/IR emitter components as output emitters, with a clearly shown optical path aimed toward the optical detector in the first circuit.
+- The user changes the potentiometer resistance. In the intended demonstration, increasing the control resistance should reduce the LED brightness; decreasing it should increase brightness. Implement this direction deliberately and document the assumed control relationship.
+- Add a power supply/generator whose voltage and current limit can be adjusted.
+- The emitted IR light must be represented as an optical path to the detector, not as an electrical wire between the LED and detector.
+- All values and behaviors are approximate, educational simulation only, not experimental measurements.
+
+IMPORTANT SAFETY/ENGINEERING CLARIFICATION:
+Do not connect an LED directly to a supply without a current-limiting element or an explicitly modeled current-limited driver. Use a current-limiting resistor/driver stage. The potentiometer should be modeled as a 3-terminal device: terminal 1, terminal 2 (wiper), terminal 3. If used as a voltage divider, show its two end terminals across the appropriate supply and ground and route the wiper to the control input. If the teacher’s intended grounding/pin arrangement is ambiguous, label the assumed wiring in the UI rather than silently asserting it is the exact original circuit.
+Do not confuse an LED emitter, photodiode, and photoresistor:
+- The IR LEDs are light sources.
+- FD in the earlier circuit is the photodetector shown in that circuit.
+- If the intended detector is specifically a photoresistor/LDR instead of the FD photodiode, do not silently replace FD; expose the detector type as an explicit modeling choice and explain the difference. Keep the existing FD component and its circuit unless the user/teacher confirms a different physical detector.
+- Use conventional current direction consistently.
+- The power source must include a voltage setting and a current limit. Do not imply that a source's current is independently forced through every branch; branch currents should follow the modeled circuit and load.
+- This is a conceptual browser simulation. Never claim validated hardware performance, certified accuracy, or real fuel moisture measurement.
+
+========================================================
+STEP 1 — INSPECT BEFORE MODIFYING
+========================================================
+1. Read all current project files before editing (index.html, about.html, style.css, script.js, and any existing modules).
+2. Inspect both supplied circuit images and the existing drawn circuit.
+3. Inventory all visible components and labels from both references.
+4. Identify current missing wires, incorrect endpoints, missing component labels, disconnected terminals, hidden connections, absent power/ground connections, and components omitted from the first drawing.
+5. Do not delete or replace the first circuit. Keep all its original visible components and then add the missing components/features from the second circuit.
+6. Do not invent certainty for blurry connections. Keep a connection marked “Taxminiy ulanish” or “Tekshirilishi kerak” if the source image cannot establish it.
+7. Then implement the actual code changes. Do not stop after explaining a plan.
+
+========================================================
+STEP 2 — ONE INTEGRATED SCHEMATIC, NOT TWO UNRELATED SCHEMATICS
+========================================================
+Create one large, pan/zoom-capable SVG schematic with clearly separated but connected functional zones:
+A. IR optical source / LED emitters.
+B. Optical detector FD and analog measurement/amplification section.
+C. Digital synchronization / logic section.
+D. LED driver / output branches A and B.
+E. Adjustable supply and potentiometer input.
+F. Test points and measurement outputs.
+
+Make the signal flow visually easy to understand:
+Potentiometer + adjustable supply → control / synchronization / driver stage → IR LED 1 and IR LED 2 → optical beams → FD optical detector → analog signal conditioning and amplification → measurement outputs and graphs.
+This is the conceptual intended flow. Match the actual reference topology wherever the images clearly establish it. Where the two source diagrams use different signal directions or ambiguous connectors, use labeled interface nodes such as CONTROL_IN, LED_A, LED_B, OPTICAL_PATH_A, OPTICAL_PATH_B, FD_OUT, ANALOG_A, ANALOG_B, and SYNC_OUT, and mark any assumed link as an assumption.
+Do not falsely claim the schematic exactly reproduces a verified hardware design if some connections are inferred.
+
+Use a single combined workspace and one shared simulation state. A user should be able to trace the signal from control input through the driver, see the LEDs change brightness, see the light beams reach the detector, and see the detector/analog output and graphs respond.
+
+========================================================
+STEP 3 — PRESERVE AND COMPLETE THE FIRST ANALOG OPTICAL CIRCUIT
+========================================================
+Keep all existing components from the earlier dark schematic. Do not simplify it by removing components just to make room.
+
+Preserve and verify, where visible:
+- IR LED / optical source representation from the existing circuit.
+- FD photodetector.
+- A1 and A2 analog amplifier blocks.
+- A3.1 and A3.2 branches.
+- R1, R2, R3, R4, R5, R6.
+- C1, C2, C3, C4, C5, C6 wherever they exist in the original reference.
+- TP1, TP2, TP3, TP4, TP5, TP6.
+- +12 V and -12 V rails where shown.
+- Ground connections and A/B outputs.
+- Existing component values only if they are already in the code or legible in the reference. If not, mark values as assumed.
+
+Repair its wire paths:
+- Every visible wire endpoint must touch the appropriate component terminal or junction.
+- Use explicit nodes and stable wire IDs.
+- Make junction dots visible when branches connect.
+- Crossings are not junctions unless explicitly marked.
+- Do not draw wires underneath component bodies in a way that makes them appear broken.
+- Make sure the drawing geometry and connection model agree.
+- Use a diagnostic mode to highlight connected and disconnected terminals.
+
+========================================================
+STEP 4 — ADD THE SECOND DIGITAL / DRIVER CIRCUIT WITHOUT OMITTING ITS COMPONENTS
+========================================================
+Add the visible elements from the newly supplied white schematic as the digital synchronization and LED-driver section. Keep component labels readable and preserve their approximate relative arrangement where practical.
+
+Elements to inventory and include if visibly present:
+- Digital logic blocks: DA.1.1, DA.1.2, DA.1.3, DA.2, DA.3.1, DA.3.2, DA.3.3, DA.3.4.
+- Capacitors C1–C8, matching the labels visible in this second diagram; avoid duplicate-ID conflicts with the first schematic by using internal unique IDs such as ANALOG_C1 and DIGITAL_C1 while displaying the original reference labels in their respective zones.
+- Resistors R1–R17 as visible in the second diagram; similarly use unique internal IDs per zone to avoid conflicts, while keeping displayed labels such as R1 or R17 in context.
+- Diodes VD1 and VD2.
+- Transistors T1, T2, T3, T4.
+- Supply points +5 V and +12 V where visible.
+- Ground symbols.
+- Output branches for ИД1 and ИД2, including the shown variable resistor symbols R9 and R17 and their associated components.
+- Any visible connectors, junctions, pin numbers, signal lines, and labels that can be identified from the image.
+
+Important: the first and second images reuse component labels (e.g. R1 and C1). Do not let these collide in the internal data model. Use stable unique internal IDs such as ANALOG_R1 and DIGITAL_R1 while showing the reference labels within their own circuit zones.
+
+Digital logic blocks must not be decorative boxes. Where their exact chip family/function is unknown, simulate them as clearly labeled conceptual logic/timing blocks with editable input states and truth-table or timing behavior appropriate to the implemented model. Do not claim a specific real IC part number without evidence.
+Transistors should have a basic documented switch/driver model (on/off or approximate operating state) if a full transistor solver is not implemented. Do not fabricate detailed transistor electrical performance.
+
+========================================================
+STEP 5 — ADD THE THREE-TERMINAL POTENTIOMETER AND ADJUSTABLE SUPPLY
+========================================================
+Add a visibly recognizable potentiometer with three labeled terminals:
+- Terminal A: one end.
+- Terminal W: movable wiper.
+- Terminal B: the other end.
+
+Show the knob/slider and numeric resistance setting in ohms or kΩ. Provide a sensible adjustable range and bounds. State that the range is an illustrative assumption unless the real potentiometer value is supplied.
+
+Required behavior:
+- When resistance increases, the modeled control level must move in the intended direction and LED brightness must decrease.
+- When resistance decreases, LED brightness must increase.
+- Use an explicit and documented mapping from potentiometer resistance to control level / driver duty cycle / LED current.
+- The mapping must be monotonic in the intended direction, bounded, and validated.
+- Do not simply change the displayed brightness text; the actual simulated LED intensity, optical beam intensity, detector response, and relevant graph traces must update.
+- The potentiometer can be modeled as a voltage divider if its ends are connected across a supply and ground. If used as a variable resistor, clearly identify which two terminals are active. Do not claim both arrangements simultaneously.
+
+Add an adjustable power supply / generator panel:
+- Enable/disable switch.
+- Output voltage setting.
+- Current limit setting.
+- Optional waveform setting (DC by default; only add AC/pulse modes if they are actually implemented).
+- Display simulated supply voltage, total current drawn if the model can calculate it, current-limit status, and estimated power.
+- Keep analog +12 V / -12 V rails, digital +5 V, and LED-driver supply logically distinct if that is what the circuit needs.
+- Changing the supply voltage must affect modeled driver headroom and outputs. The current limit must constrain the modeled output/branch current if reached.
+- Validate safe configured ranges in the educational simulation and explain all assumed values.
+- Do not pretend that the set current limit is the actual current drawn; distinguish “Current limit setting” from “simulated load current.”
+
+========================================================
+STEP 6 — MODEL BOTH INFRARED EMITTERS AND THE OPTICAL PATH
+========================================================
+Add two distinct IR emitter components corresponding to the second circuit’s output branches (ИД1 and ИД2), while retaining any optical source already present in the first circuit.
+
+Each emitter must show:
+- ID and label.
+- On/off or driver state.
+- Simulated current.
+- Approximate optical intensity / relative brightness.
+- Selected wavelength (use a documented assumed wavelength in the relevant IR range if exact LED part data is unavailable).
+- Whether the value is assumed or calculated.
+
+Render animated optical beams from the emitters toward the detector as curved or straight optical paths with directional arrows / moving light pulses. These are optical signals, NOT electrical wires.
+- The beam must visibly reach the detector’s optical input area.
+- Beam intensity/glow/particle density must respond to the corresponding emitter’s simulated optical output.
+- If the emitter is off or its driver is inactive, its beam must stop or become very dim.
+- If the detector receives contributions from both LEDs, define and document how those contributions combine.
+- If the reference implies separate channels, preserve separate paths and channels.
+- Keep the physical placement understandable: LEDs face the detector, with visible alignment and a small adjustable alignment control if practical.
+- Do not imply that the optical path is an electrical connection.
+
+The teacher’s intended visual demonstration is especially important:
+Potentiometer resistance increases → LED brightness decreases.
+Potentiometer resistance decreases → LED brightness increases.
+The optical beam changes visibly; the detector signal changes; the analog output and graphs respond accordingly.
+
+If there is a conflict between the assumed LED/detector geometry and the source screenshot, preserve the existing circuit layout and create a separate clearly labeled optical path in the integrated workspace rather than destroying the electrical schematic.
+
+========================================================
+STEP 7 — CREATE ONE SHARED, CONSISTENT SIMULATION MODEL
+========================================================
+All components, wires, indicators, tooltips, output labels, and graphs must use one shared simulation state.
+
+Implement an approximate model with documented assumptions:
+1. Potentiometer resistance → control voltage or normalized control value.
+2. Control value → driver duty cycle or current command, deliberately mapped so greater resistance means lower brightness.
+3. Supply voltage and current limit → allowed driver output/current.
+4. LED current → relative optical intensity using an assumed proportional relationship within configured bounds.
+5. Optical intensity and alignment → received optical intensity at the detector.
+6. Detector responsivity/sensitivity → estimated detector output signal.
+7. Analog gain/filter model → amplified/filtered signal at A/B outputs.
+8. Digital timing/logic blocks → synchronization and driver enable states, using a transparent conceptual model.
+9. Shared signal values → live charts and measurement panels.
+
+Use consistent units and equations where applicable:
+- Resistor: V = I × R.
+- Resistor power: P = V × I or I²R.
+- Capacitor charge: Q = C × V.
+- Capacitor energy: E = 0.5 × C × V².
+- Capacitor current: I = C × dV/dt only if a time-varying voltage is modeled.
+- LED current must be constrained by the modeled driver and current-limiting components.
+- A simplified amplifier output can be Vout = gain × Vin, limited by the configured output rails.
+- Photodetector current can be approximated as Iphoto = responsivity × received optical power, with responsivity and units explicitly defined as assumed.
+- Use a low-pass filter approximation only if its parameters and state are implemented.
+- If a detailed nodal circuit solver is not implemented, clearly label the model “Block-level estimated simulation” and do not claim Kirchhoff-consistent results for every branch.
+
+Do not display unsupported values. Show “N/A — this model does not calculate this quantity” if a value is unavailable. Avoid arbitrary numbers that change only to make the UI look active.
+
+========================================================
+STEP 8 — FIX ALL WIRE / CURRENT / VOLTAGE VISIBILITY
+========================================================
+- Every wire should have a stable ID, start/end node, and connection status.
+- Use SVG paths to draw wires and animate signal markers on actual modeled paths.
+- Distinguish inactive, active, assumed, and disconnected branches.
+- Add junction dots at real nodes.
+- Make wire endpoints touch terminals exactly.
+- Ensure labels and measurement values do not overlap or hide components.
+- Clicking a wire opens a tooltip/panel with node IDs, connected components, current, node voltages, voltage difference, and model confidence/status where supported.
+- Ideal wire voltage drop should be approximately zero unless wire resistance is explicitly modeled.
+- Show zero/no current where the model predicts no current; do not animate inactive branches.
+- When a component is selected, highlight its actual connected paths.
+
+========================================================
+STEP 9 — GRAPH REQUIREMENTS
+========================================================
+Keep the graph work integrated with the same model. Do not create unrelated decorative graphs.
+
+Graph 1: Optical spectrum / transmission graph
+- Four clear traces with a professional scientific style.
+- White plotting region, dark axes, dashed gray grid, readable ticks, centered title.
+- Wavelength axis and transmission/normalized-response axis with correct units.
+- A screenshot-like wavelength mode around 600–1250 nm, and a separate research mode around 1800–2400 nm for the NIR detector.
+- Label any trace values above 100% as normalized/reference-relative response, not absolute transmission.
+- The spectrum should be a smooth deterministic model with documented broad absorption features, not random spikes.
+- LED brightness / optical input changes must affect the relevant trace or measured response in a predictable way.
+- Temperature, contamination, path length, and channel settings should affect only the modeled outputs they are supposed to affect.
+- During RUN, animate a scanning cursor and continuously acquire/update spectral samples. If full trace animation is required, progressively redraw or smoothly update the curve itself, not only the cursor.
+
+Graph 2: Electrical time-domain graph
+- Plot time on x-axis and voltage (V) or current (mA) on y-axis; do not mix units on one axis.
+- Show at least the relevant input signal, detector output, amplified A output, and amplified B output as separate labeled traces if those signals are available in the model.
+- The waveform curves themselves must visibly scroll/update continuously during RUN, with samples arriving over time.
+- Wave amplitude and level must respond to the potentiometer, LED brightness, supply voltage, detector response, and amplifier gain as appropriate.
+- Use physically plausible illustrative waveforms (DC offset plus a sinusoid/pulse if the model includes modulation), not arbitrary independent wiggles.
+- A constant DC signal may be nearly flat; if so, explain that and optionally provide a clearly labeled optional test waveform mode to demonstrate time-domain behavior. Do not fake a changing electrical signal while the modeled input is constant.
+- Use a bounded sample buffer and one requestAnimationFrame loop or a controlled simulation timer.
+- PAUSE freezes both traces and sample acquisition; RESTART clears the buffer; RESUME continues.
+- Provide clear RUNNING / PAUSED / RESULT READY states.
+- Include hover readouts and a useful summary panel.
+
+The user’s explicit requirement is that BOTH graphs are animated. A moving cursor alone does not count as full graph animation. The actual curve points/path must visibly update or scroll continuously during RUN. The motion must remain tied to the modeled signal.
+
+========================================================
+STEP 10 — USER INTERFACE AND CONTROL BEHAVIOR
+========================================================
+- Preserve the existing dark circuit theme and visual quality.
+- Put the integrated schematic in the primary workspace; avoid shrinking it to fit too many cards.
+- Provide component selection, hover tooltips, pan/zoom, fit-to-screen, theme toggle if already present.
+- Provide RUN, PAUSE/RESULT, RESUME, and RESTART controls.
+- Add a dedicated potentiometer slider and numeric resistance input.
+- Add supply voltage and current-limit inputs.
+- Add emitter on/off controls and optionally separate controls for LED 1 and LED 2.
+- Add a compact status panel for source, driver, optical beam, detector, analog output, and acquisition.
+- Use Uzbek UI labels and proper scientific units.
+- Keep all controls functional. No decorative buttons.
+- When paused, simulation time and animated markers must stop. Editing a parameter while paused may recompute static values, but it must not secretly advance time.
+- Avoid duplicate timers, event listeners, stale state, and excessive DOM/SVG redraws.
+
+========================================================
+STEP 11 — TEST THE EXACT TEACHER DEMONSTRATION
+========================================================
+Test and report the following behavior honestly:
+
+TEST A — Potentiometer direction:
+1. Set a lower resistance.
+2. Run the simulation.
+3. Record the simulated LED brightness, LED current, detector response, and relevant graph values.
+4. Increase potentiometer resistance.
+5. Verify that LED brightness decreases and the optical beam becomes dimmer.
+6. Verify that the detector output and related graph respond consistently.
+7. Decrease resistance again.
+8. Verify that brightness increases again.
+
+TEST B — Power supply:
+1. Change supply voltage within the configured allowed range.
+2. Verify that the modeled LED driver/output responds.
+3. Set a lower current limit.
+4. Verify that the model constrains current when the limit is reached.
+5. Clearly distinguish current-limit setting from actual simulated current draw.
+
+TEST C — Two emitters and detector:
+1. Enable LED 1 and verify its optical path and detector contribution.
+2. Enable LED 2 and verify its optical path and detector contribution.
+3. Disable each in turn and verify the correct channel response.
+4. Verify that optical paths are not represented as electrical wires.
+
+TEST D — Graphs:
+1. Start RUN and observe both graphs for at least five seconds.
+2. Confirm the actual curve paths update/scroll, not only the scan cursor.
+3. Change potentiometer resistance and confirm relevant trace amplitude/level responds.
+4. Change supply voltage and confirm relevant electrical signals respond.
+5. Pause and confirm both graph traces and sample counts freeze.
+6. Resume and confirm acquisition continues.
+7. Restart and confirm the documented buffers and scan position reset.
+8. Confirm no random, unrelated movement is being used to fake activity.
+
+TEST E — Connectivity:
+1. Inspect all existing first-circuit components and all identified second-circuit components.
+2. Confirm that each visible wire has a corresponding model connection or is explicitly marked assumed/unresolved.
+3. Confirm that no component from the first schematic was deleted.
+4. Confirm that repeated labels across the two source diagrams do not collide internally.
+5. Confirm no browser-console errors during these interactions.
+
+========================================================
+STEP 12 — FINAL DELIVERY
+========================================================
+Make the actual code changes. Do not respond with only an explanation or pseudocode.
+
+At completion, provide:
+1. Simple Uzbek explanation of what was changed.
+2. List of files changed.
+3. How to run the app.
+4. The documented assumptions for the combined topology.
+5. Which values are calculated and which are only illustrative.
+6. Whether all test steps were actually run. Do not claim successful tests unless performed.
+7. Any remaining unresolved connection that requires the teacher’s original schematic or component datasheets.
+
+FINAL ACCEPTANCE RULE:
+The result is not complete if the two diagrams remain independent, if the original first circuit is removed, if the potentiometer changes only a number rather than the LED/optical/detector response, if the source is not adjustable, or if either graph remains static while RUN is active. Build one connected, understandable, approximate interactive simulation with honest limitations.
